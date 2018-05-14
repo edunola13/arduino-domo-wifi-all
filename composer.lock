@@ -1,0 +1,159 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "214d5a4df4151df50c21dd550c730684",
+    "packages": [
+        {
+            "name": "igniteit/arduino-actuators-oo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edunola13/arduino-actuators-oo.git",
+                "reference": "4a904683efeb6d7edf94cb04e5303b532a48216c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edunola13/arduino-actuators-oo/zipball/4a904683efeb6d7edf94cb04e5303b532a48216c",
+                "reference": "4a904683efeb6d7edf94cb04e5303b532a48216c",
+                "shasum": ""
+            },
+            "require": {
+                "igniteit/arduino-basic-oo": "dev-master"
+            },
+            "type": "arduino-lib",
+            "authors": [
+                {
+                    "name": "Eduardo Sebastian Nola",
+                    "email": "edunola13@hotmail.com",
+                    "homepage": "http://www.edunola.com.ar/",
+                    "role": "Designer,Developer"
+                }
+            ],
+            "keywords": [
+                "Arduino"
+            ],
+            "support": {
+                "source": "https://github.com/edunola13/arduino-actuators-oo/tree/master",
+                "issues": "https://github.com/edunola13/arduino-actuators-oo/issues"
+            },
+            "time": "2018-05-06T02:18:21+00:00"
+        },
+        {
+            "name": "igniteit/arduino-basic-oo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edunola13/arduino-basic-oo.git",
+                "reference": "f7a0248c804b29a9b637a4b1d6c88fd83a63cf96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edunola13/arduino-basic-oo/zipball/f7a0248c804b29a9b637a4b1d6c88fd83a63cf96",
+                "reference": "f7a0248c804b29a9b637a4b1d6c88fd83a63cf96",
+                "shasum": ""
+            },
+            "type": "arduino-lib",
+            "authors": [
+                {
+                    "name": "Eduardo Sebastian Nola",
+                    "email": "edunola13@hotmail.com",
+                    "homepage": "http://www.edunola.com.ar/",
+                    "role": "Designer,Developer"
+                }
+            ],
+            "keywords": [
+                "Arduino"
+            ],
+            "support": {
+                "source": "https://github.com/edunola13/arduino-basic-oo/tree/master",
+                "issues": "https://github.com/edunola13/arduino-basic-oo/issues"
+            },
+            "time": "2018-05-02T02:09:26+00:00"
+        },
+        {
+            "name": "igniteit/arduino-http",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edunola13/arduino-http.git",
+                "reference": "8b37a8119a97dccd2fcbd93124fc66c6b0132777"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edunola13/arduino-http/zipball/8b37a8119a97dccd2fcbd93124fc66c6b0132777",
+                "reference": "8b37a8119a97dccd2fcbd93124fc66c6b0132777",
+                "shasum": ""
+            },
+            "require": {
+                "igniteit/arduino-basic-oo": "dev-master"
+            },
+            "type": "arduino-lib",
+            "authors": [
+                {
+                    "name": "Eduardo Sebastian Nola",
+                    "email": "edunola13@hotmail.com",
+                    "homepage": "http://www.edunola.com.ar/",
+                    "role": "Designer,Developer"
+                }
+            ],
+            "keywords": [
+                "Arduino"
+            ],
+            "support": {
+                "source": "https://github.com/edunola13/arduino-http/tree/master",
+                "issues": "https://github.com/edunola13/arduino-http/issues"
+            },
+            "time": "2018-05-02T22:37:26+00:00"
+        },
+        {
+            "name": "igniteit/arduino-sensors-oo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edunola13/arduino-sensors-oo.git",
+                "reference": "c15f14a319730752903086d87c1b76b337a1c884"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edunola13/arduino-sensors-oo/zipball/c15f14a319730752903086d87c1b76b337a1c884",
+                "reference": "c15f14a319730752903086d87c1b76b337a1c884",
+                "shasum": ""
+            },
+            "require": {
+                "igniteit/arduino-basic-oo": "dev-master"
+            },
+            "type": "arduino-lib",
+            "authors": [
+                {
+                    "name": "Eduardo Sebastian Nola",
+                    "email": "edunola13@hotmail.com",
+                    "homepage": "http://www.edunola.com.ar/",
+                    "role": "Designer,Developer"
+                }
+            ],
+            "keywords": [
+                "Arduino"
+            ],
+            "support": {
+                "source": "https://github.com/edunola13/arduino-sensors-oo/tree/master",
+                "issues": "https://github.com/edunola13/arduino-sensors-oo/issues"
+            },
+            "time": "2018-05-02T03:00:47+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "igniteit/arduino-sensors-oo": 20,
+        "igniteit/arduino-actuators-oo": 20,
+        "igniteit/arduino-http": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
