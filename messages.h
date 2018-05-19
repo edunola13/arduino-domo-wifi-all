@@ -1,0 +1,18 @@
+//MENSAJES JSON
+#define msjOk "{\"msj\": \"ok\"}"
+#define msjOkTy2 "msj=ok|"
+//MENSAJES PRINT
+#define chaIp "Cambiando IP"
+#define cliAv "client avalaible"
+#define cliDi "client disconnected"
+#define seNo "Enviando Notificacion"
+#define noNCo "Notificador sin Configurar"
+#define noSe "Notificacion enviada"
+#define noNCon "No se pudo conectar al notificador"
+#define loCo "Cargando Configuracion"
+#define deVa "Valores por defecto"
+#define enCo "Configuracion Finalizada"
+#define reCo "Reseteando Configuracion"
+#define enRe "Reseteo Finalizado"
+#define saCo "Guardando Configuracion"
+#define enSa "Configuracion Guardada"

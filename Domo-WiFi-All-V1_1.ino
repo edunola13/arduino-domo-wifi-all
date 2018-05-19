@@ -5,8 +5,16 @@
 
 // Uncomment to enable printing out nice debug messages.
 #define DOMO_DEBUG
-//#define USE_WDT
-#include "DomoBasic_V1_0.h"
+//#define DOMO_SPEED 9600
+//WATCHDOG NO FUNCIONA CON ETHERNET SHIELD
+//#define USE_WDT 
+//#define WDT_TIME WDTO_8S
+#include "vendor/igniteit/arduino-general-use/common_initial.h"
+#include "messages.h"
+
+#define resetPin 2
+#define resetPoint 0
+#include "vendor/igniteit/arduino-general-use/reset_manage.h"
 
 #include "vendor/igniteit/arduino-sensors-oo/AnalogSensor.h"
 #include "vendor/igniteit/arduino-sensors-oo/AnalogSensor.cpp"
@@ -114,17 +122,16 @@ unsigned long lasttimeControls= 0;
 bool notification= false;
 
 #define USE_ACTUAL_ITEM
-#include "ResetManage_V1_0.h"
-#include "Json_V1_0.h"
-#include "WiFiManage_V1_0.h"
-#include "HttpController_V1_0.h"
+#include "vendor/igniteit/arduino-general-use/api/json_interface_api.h"
+#include "vendor/igniteit/arduino-general-use/wifi/wifi_manage.h"
+#include "vendor/igniteit/arduino-general-use/api/general_controllers_api.h"
 
 //CODE PROGRAM
 #define codePro "wifi-all-1.0"
 
 void setup() {
   //BASIC
-  initialDomo();  
+  initialGeneric();  
   //RESET
   initialReset();
   //CONFIGURATION
@@ -134,6 +141,8 @@ void setup() {
 }
 
 void loop() {
+  actualizeIp();
+  
   //ACTUALIZA SENSORES Y CONTROLADORES  
   actualizeSensors();
   actualizeControls();
@@ -152,25 +161,17 @@ void loop() {
 //CONFIGURACION
 void loadConfiguration(){
   DEB_DO_PRINTLN(loCo);
-  uint8_t pos= 0;
+  int pos= 0;
   //Compruebo que se hayan grabado datos, si no utilizo valores por defecto
-  uint8_t load= 0;EEPROM.read(pos++);
+  uint8_t load= EEPROM.read(pos++);
   if(load == 1){
     //Lee configuracion global
     readConfWifi(pos);
     timeSensors= EEPROMRInt(pos); pos+= 4;
     timeControls= EEPROMRInt(pos); pos+= 4;
     
-    /*char url[50];
-    EEPROM.get(pos, url);pos+= 50;
-    urlNotifier= url;
-    char ke[20];
-    EEPROM.get(pos, ke);pos+= 20;
-    keyNotifier= ke;
-    EEPROM.get(pos, notifierip);pos+= 6;*/
-    
     //Lee configuracion de componentes
-    pos= 100;
+    pos= 200;
     //AnalogSensor
     for (uint8_t i= 0; i < analogSize; i++) {
       analogSen[i].readFromEeprom(pos);
@@ -244,7 +245,7 @@ void loadConfiguration(){
         controlBuzzer[i].setSensor(getSensor(controlBuzzer[i].getSensorCode(), controlBuzzer[i].getSensorId()), controlBuzzer[i].getSensorId());
       }
       pos+= controlBuzzer[i].positions();
-    }
+    }    
   }else{
     DEB_DO_PRINTLN(deVa);
   }  
@@ -252,20 +253,14 @@ void loadConfiguration(){
 }
 void saveConfiguration(){
   DEB_DO_PRINTLN(saCo);
-  uint8_t pos= 0;
+  int pos= 0;
   EEPROM.update(pos++, 1);
   //Escribo configuracion global
   saveConfWifi(pos);
   EEPROMWInt(pos, timeSensors); pos+= 4;
-  EEPROMWInt(pos, timeControls); pos+= 4;
-  
-  /**char url[50]; urlNotifier.toCharArray(url, 50);
-  EEPROM.put(pos, url);pos+= 50;
-  char ke[20]; keyNotifier.toCharArray(ke, 20);
-  EEPROM.put(pos, ke);pos+= 20;
-  EEPROM.put(pos, notifierip);pos+= 6;*/
+  EEPROMWInt(pos, timeControls); pos+= 4;  
 
-  pos= 100;
+  pos= 200;
   //AnalogSensor
   for (uint8_t i= 0; i < analogSize; i++) {
     analogSen[i].saveInEeprom(pos);
@@ -328,7 +323,12 @@ void saveConfiguration(){
     controlBuzzer[i].saveInEeprom(pos);
     pos+= controlBuzzer[i].positions();
   } 
-  DEB_DO_PRINTLN(enSa);  
+
+char url2[50];
+    EEPROM.get(44, url2);//pos+= 50;
+    Serial.println(url2);
+  
+  DEB_DO_PRINTLN(enSa);
 }
 
 //
@@ -558,19 +558,6 @@ void controllerInfo(HttpRequest &httpRequest){
     if(isNotNull(value)){ timeSensors= value.toInt(); }  
     value= parseProperty(httpRequest.getPunteroBody(), "tiC");
     if(isNotNull(value)){ timeControls= value.toInt(); }
-    /*value= parseProperty(httpRequest.getPunteroBody(), "urlN");
-    if(isNotNull(value)){ urlNotifier= value; }
-    value= parseProperty(httpRequest.getPunteroBody(), "keyN");
-    if(isNotNull(value)){ keyNotifier= value; }  
-      
-    value= parseProperty(httpRequest.getPunteroBody(), "ipN1");
-    if(isNotNull(value)){ notifierip[0]= value.toInt(); }    
-    value= parseProperty(httpRequest.getPunteroBody(), "ipN2");
-    if(isNotNull(value)){ notifierip[1]= value.toInt(); }    
-    value= parseProperty(httpRequest.getPunteroBody(), "ipN3");
-    if(isNotNull(value)){ notifierip[2]= value.toInt(); }    
-    value= parseProperty(httpRequest.getPunteroBody(), "ipN4");
-    if(isNotNull(value)){ notifierip[3]= value.toInt(); }*/
     
     updateWifi(httpRequest);
     
@@ -605,10 +592,6 @@ void controllerInfo(HttpRequest &httpRequest){
       server.partialSendApiRest(client, "\"config\": {");
         server.partialSendApiRest(client, "\"tiS\": " + String(timeSensors) + ",");
         server.partialSendApiRest(client, "\"tiC\": " + String(timeControls) + ",");
-        /*server.partialSendApiRest(client, "\"urlN\": \"" + urlNotifier + "\"");server.partialSendApiRest(client, ",");
-        server.partialSendApiRest(client, "\"keyN\": \"" + keyNotifier + "\"");server.partialSendApiRest(client, ",");
-        server.partialSendApiRest(client, "\"ipN\": \"" + String(notifierip[0]) + "." + String(notifierip[1]) + "." + String(notifierip[2]) + "." + String(notifierip[3]) + "\"");
-        server.partialSendApiRest(client, ",");*/
         jsonWifi();
       server.partialSendApiRest(client, "}");
     server.partialSendApiRest(client, "}");

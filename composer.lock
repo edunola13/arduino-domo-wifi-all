@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "214d5a4df4151df50c21dd550c730684",
+    "content-hash": "22e8391e5d4dda57ada2a84f7de1111e",
     "packages": [
         {
             "name": "igniteit/arduino-actuators-oo",
@@ -74,17 +74,49 @@
             "time": "2018-05-02T02:09:26+00:00"
         },
         {
+            "name": "igniteit/arduino-general-use",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edunola13/arduino-general-use.git",
+                "reference": "a5b1c0255c072def17eae5cecddad412678772d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edunola13/arduino-general-use/zipball/a5b1c0255c072def17eae5cecddad412678772d6",
+                "reference": "a5b1c0255c072def17eae5cecddad412678772d6",
+                "shasum": ""
+            },
+            "type": "arduino-lib",
+            "authors": [
+                {
+                    "name": "Eduardo Sebastian Nola",
+                    "email": "edunola13@hotmail.com",
+                    "homepage": "http://www.edunola.com.ar/",
+                    "role": "Designer,Developer"
+                }
+            ],
+            "keywords": [
+                "Arduino"
+            ],
+            "support": {
+                "source": "https://github.com/edunola13/arduino-general-use/tree/master",
+                "issues": "https://github.com/edunola13/arduino-general-use/issues"
+            },
+            "time": "2018-05-17T23:14:31+00:00"
+        },
+        {
             "name": "igniteit/arduino-http",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/edunola13/arduino-http.git",
-                "reference": "8b37a8119a97dccd2fcbd93124fc66c6b0132777"
+                "reference": "55db31b8c3e581d2e977c14392b4dba4de74ec07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/edunola13/arduino-http/zipball/8b37a8119a97dccd2fcbd93124fc66c6b0132777",
-                "reference": "8b37a8119a97dccd2fcbd93124fc66c6b0132777",
+                "url": "https://api.github.com/repos/edunola13/arduino-http/zipball/55db31b8c3e581d2e977c14392b4dba4de74ec07",
+                "reference": "55db31b8c3e581d2e977c14392b4dba4de74ec07",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +138,7 @@
                 "source": "https://github.com/edunola13/arduino-http/tree/master",
                 "issues": "https://github.com/edunola13/arduino-http/issues"
             },
-            "time": "2018-05-02T22:37:26+00:00"
+            "time": "2018-05-17T23:29:01+00:00"
         },
         {
             "name": "igniteit/arduino-sensors-oo",
@@ -148,6 +180,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "igniteit/arduino-general-use": 20,
         "igniteit/arduino-sensors-oo": 20,
         "igniteit/arduino-actuators-oo": 20,
         "igniteit/arduino-http": 20
